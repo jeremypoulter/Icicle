@@ -660,7 +660,7 @@ F 3 "~" H 8500 1950 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 Wire Wire Line
-	8500 1800 8500 1950
+	8500 1800 8500 1850
 $Comp
 L power:GND #PWR0102
 U 1 1 600AFD11
@@ -684,7 +684,7 @@ F 3 "~" H 8900 1950 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 Wire Wire Line
-	8900 1800 8900 1950
+	8900 1800 8900 1850
 $Comp
 L Mechanical:MountingHole H1
 U 1 1 600A323E
@@ -718,4 +718,25 @@ F 3 "" H 2650 1100 50  0001 C CNN
 	1    2650 1100
 	-1   0    0    1   
 $EndComp
+$Comp
+L Device:C C1
+U 1 1 60272B9A
+P 8700 1850
+F 0 "C1" V 8952 1850 50  0000 C CNN
+F 1 "10uF" V 8861 1850 50  0000 C CNN
+F 2 "Capacitor_SMD:C_1206_3216Metric" H 8738 1700 50  0001 C CNN
+F 3 "~" H 8700 1850 50  0001 C CNN
+	1    8700 1850
+	0    1    -1   0   
+$EndComp
+Wire Wire Line
+	8850 1850 8900 1850
+Connection ~ 8900 1850
+Wire Wire Line
+	8900 1850 8900 1950
+Wire Wire Line
+	8550 1850 8500 1850
+Connection ~ 8500 1850
+Wire Wire Line
+	8500 1850 8500 1950
 $EndSCHEMATC
