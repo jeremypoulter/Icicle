@@ -1,0 +1,3 @@
+(fp_lib_table
+  (lib (name Icicle)(type KiCad)(uri ${KIPRJMOD}/Icicle.pretty)(options "")(descr ""))
+)
