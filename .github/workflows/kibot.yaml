@@ -39,6 +39,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install KiKit
+      run: |
+        python -m pip install --upgrade pip
+        pip install --upgrade kikit
+
+    - name: Make the Panel
+      run: |
+        kikit panelize grid --space 3 --gridsize 5 1 --tabwidth 3 --tabheight 3 --htabs 1 --vtabs 2 --mousebites 0.5 0.8 -0.25 --radius 1 Icicle.kicad_pcb Icicle_panel.kicad_pcb
+
     - uses: nerdyscout/kicad-exports@v2.2
       with:
       # Required - kibot config file
@@ -49,6 +64,7 @@ jobs:
         schema: '*.sch'
       # optional - PCB design file
         board: '*.kicad_pcb'
+
     - uses: nerdyscout/kicad-exports@v2.2
       with:
       # Required - kibot config file
@@ -59,6 +75,7 @@ jobs:
         schema: '*.sch'
       # optional - PCB design file
         board: '*.kicad_pcb'
+
     - uses: nerdyscout/kicad-exports@v2.2
       with:
       # Required - kibot config file
@@ -69,6 +86,7 @@ jobs:
         schema: '*.sch'
       # optional - PCB design file
         board: '*.kicad_pcb'
+
     - name: upload results
       uses: actions/upload-artifact@v2
       with:
