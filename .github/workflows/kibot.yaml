@@ -47,8 +47,13 @@ jobs:
 
     - name: Install KiKit
       run: |
+        sudo apt-get install --yes --no-install-recommends \
+          zip inkscape make git libmagickwand-dev \
+          libgraphicsmagick1-dev libmagickcore-dev \
+          openscad bats
         python -m pip install --upgrade pip
-        pip install --upgrade kikit pcbnew
+        pip install --upgrade PcbDraw
+        pip install --upgrade kikit
 
     - name: Make the Panel
       run: |
