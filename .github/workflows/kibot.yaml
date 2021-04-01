@@ -46,7 +46,7 @@ jobs:
         python-version: '3.x'
 
     - name: Install KiCad
-      uses: yaqwsx/KiKit
+      uses: yaqwsx/KiKit@master
 
     - name: Install KiKit
       run: |
