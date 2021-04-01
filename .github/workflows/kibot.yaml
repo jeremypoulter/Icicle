@@ -45,6 +45,9 @@ jobs:
       with:
         python-version: '3.x'
 
+    - name: Install KiCad
+      uses: yaqwsx/KiKit
+
     - name: Install KiKit
       run: |
         sudo apt-get install --yes --no-install-recommends \
