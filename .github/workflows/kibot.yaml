@@ -19,23 +19,53 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+
     - uses: nerdyscout/kicad-exports@v2.2
       with:
-      # Required - kibot config file
         config: docs.kibot.yaml
-      # optional - prefix to output defined in config
         dir: docs
-      # optional - schematic file
-        schema: '*.sch'
-      # optional - PCB design file
-        board: '*.kicad_pcb'
     - name: upload results
       uses: actions/upload-artifact@v2
       with:
         name: docs
         path: docs
 
-  fabrications:
+  fabrications_single:
+    name: Fabrication - Single board
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: nerdyscout/kicad-exports@v2.2
+      with:
+        config: gerbers.kibot.yaml
+        dir: Icicle_single
+        board: Icicle.kicad_pcb
+        schema: Icicle.sch
+
+    - uses: nerdyscout/kicad-exports@v2.2
+      with:
+        config: jlcpcb/bom.kibot.yaml
+        dir: Icicle_single
+        board: Icicle.kicad_pcb
+        schema: Icicle.sch
+
+    - uses: nerdyscout/kicad-exports@v2.2
+      with:
+        config: jlcpcb/position.kibot.yaml
+        dir: Icicle_single
+        board: Icicle.kicad_pcb
+        schema: Icicle.sch
+
+    - name: upload results
+      uses: actions/upload-artifact@v2
+      with:
+        name: Icicle_single
+        path: Icicle_single
+
+
+  fabrications_panel:
+    name: Fabrication - Panel board
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -46,39 +76,27 @@ jobs:
 
     - uses: nerdyscout/kicad-exports@v2.2
       with:
-      # Required - kibot config file
         config: gerbers.kibot.yaml
-      # optional - prefix to output defined in config
-        dir: gerbers
-      # optional - schematic file
-      #  schema: '*.sch'
-      # optional - PCB design file
-      #  board: '*.kicad_pcb'
+        dir: Icicle_panel
+        board: Icicle_panel.kicad_pcb
+        schema: Icicle.sch
 
     - uses: nerdyscout/kicad-exports@v2.2
       with:
-      # Required - kibot config file
         config: jlcpcb/bom.kibot.yaml
-      # optional - prefix to output defined in config
-        dir: gerbers
-      # optional - schematic file
-      #  schema: '*.sch'
-      # optional - PCB design file
-      #  board: '*.kicad_pcb'
+        dir: Icicle_panel
+        board: Icicle_panel.kicad_pcb
+        schema: Icicle.sch
 
     - uses: nerdyscout/kicad-exports@v2.2
       with:
-      # Required - kibot config file
         config: jlcpcb/position.kibot.yaml
-      # optional - prefix to output defined in config
-        dir: gerbers
-      # optional - schematic file
-      #  schema: '*.sch'
-      # optional - PCB design file
-      #  board: '*.kicad_pcb'
+        dir: Icicle_panel
+        board: Icicle_panel.kicad_pcb
+        schema: Icicle.sch
 
     - name: upload results
       uses: actions/upload-artifact@v2
       with:
-        name: gerbers
-        path: gerbers
+        name: Icicle_panel
+        path: Icicle_panel
