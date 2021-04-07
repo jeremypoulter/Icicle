@@ -39,33 +39,14 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - uses: nerdyscout/kicad-exports@v2.2
-      with:
-        config: gerbers.kibot.yaml
-        dir: Icicle_single
-        board: Icicle.kicad_pcb
-        schema: Icicle.sch
-
-    - uses: nerdyscout/kicad-exports@v2.2
-      with:
-        config: jlcpcb/bom.kibot.yaml
-        dir: Icicle_single
-        board: Icicle.kicad_pcb
-        schema: Icicle.sch
-
-    - uses: nerdyscout/kicad-exports@v2.2
-      with:
-        config: jlcpcb/position.kibot.yaml
-        dir: Icicle_single
-        board: Icicle.kicad_pcb
-        schema: Icicle.sch
+    - name: Export JLCPCB fabrication files
+      run: docker run --rm -v $PWD:/pcb -w /pcb yaqwsx/kikit kikit fab jlcpcb --assembly --schematic Icicle.sch --ignore H1,P1,P2 Icicle.kicad_pcb Icicle_single
 
     - name: upload results
       uses: actions/upload-artifact@v2
       with:
         name: Icicle_single
         path: Icicle_single
-
 
   fabrications_panel:
     name: Fabrication - Panel board
@@ -74,29 +55,10 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Make the Panel
-      run: |
-        docker run --rm -v $PWD:/pcb -w /pcb yaqwsx/kikit kikit panelize grid --space 3 --gridsize 5 1 --tabwidth 5 --tabheight 3 --htabs 1 --vtabs 4 --mousebites 0.5 0.8 -0.25 --radius 1 --railsTb 5 --tooling 2.5 2.5 1.152 --fiducials 10 2.5 1 2  Icicle.kicad_pcb Icicle_panel.kicad_pcb
+      run: docker run --rm -v $PWD:/pcb -w /pcb yaqwsx/kikit kikit panelize grid --space 3 --gridsize 5 1 --tabwidth 5 --tabheight 3 --htabs 1 --vtabs 4 --mousebites 0.5 0.8 -0.25 --radius 1 --railsTb 5 --tooling 2.5 2.5 1.152 --fiducials 10 2.5 1 2  Icicle.kicad_pcb Icicle_panel.kicad_pcb
 
-    - uses: nerdyscout/kicad-exports@v2.2
-      with:
-        config: gerbers.kibot.yaml
-        dir: Icicle_panel
-        board: Icicle_panel.kicad_pcb
-        schema: Icicle.sch
-
-    - uses: nerdyscout/kicad-exports@v2.2
-      with:
-        config: jlcpcb/bom.kibot.yaml
-        dir: Icicle_panel
-        board: Icicle_panel.kicad_pcb
-        schema: Icicle.sch
-
-    - uses: nerdyscout/kicad-exports@v2.2
-      with:
-        config: jlcpcb/position.kibot.yaml
-        dir: Icicle_panel
-        board: Icicle_panel.kicad_pcb
-        schema: Icicle.sch
+    - name: Export JLCPCB fabrication files
+      run: docker run --rm -v $PWD:/pcb -w /pcb yaqwsx/kikit kikit fab jlcpcb --assembly --schematic Icicle.sch --ignore H1,P1,P2 Icicle_panel.kicad_pcb Icicle_panel
 
     - name: upload results
       uses: actions/upload-artifact@v2
