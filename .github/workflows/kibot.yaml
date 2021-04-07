@@ -75,7 +75,7 @@ jobs:
 
     - name: Make the Panel
       run: |
-        docker run --rm -v $PWD:/pcb -w /pcb yaqwsx/kikit kikit panelize grid --space 3 --gridsize 5 1 --tabwidth 3 --tabheight 3 --htabs 1 --vtabs 2 --mousebites 0.5 0.8 -0.25 --radius 1 Icicle.kicad_pcb Icicle_panel.kicad_pcb
+        docker run --rm -v $PWD:/pcb -w /pcb yaqwsx/kikit kikit panelize grid --space 3 --gridsize 5 1 --tabwidth 5 --tabheight 3 --htabs 1 --vtabs 4 --mousebites 0.5 0.8 -0.25 --radius 1 --railsTb 5 --tooling 2.5 2.5 1.152 --fiducials 10 2.5 1 2  Icicle.kicad_pcb Icicle_panel.kicad_pcb
 
     - uses: nerdyscout/kicad-exports@v2.2
       with:
