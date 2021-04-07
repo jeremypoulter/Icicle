@@ -24,6 +24,9 @@ jobs:
       with:
         config: docs.kibot.yaml
         dir: docs
+        board: Icicle.kicad_pcb
+        schema: Icicle.sch
+
     - name: upload results
       uses: actions/upload-artifact@v2
       with:
