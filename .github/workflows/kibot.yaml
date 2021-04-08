@@ -42,12 +42,13 @@ jobs:
     - name: Export JLCPCB fabrication files
       run: |
         docker run --rm -v $PWD:/pcb -w /pcb --user $UID:$GROUPS yaqwsx/kikit kikit fab jlcpcb --assembly --schematic Icicle.sch --ignore H1,P1,P2 Icicle.kicad_pcb Icicle_single
-        mv Icicle_single/gerbers.zip Icicle_single/Icicle_single_${{ env.GITHUB_RUN_ID }}.zip
+        mv Icicle_single/gerbers.zip Icicle_single/Icicle_single_${{ github.run_id }}.zip
 
     - name: upload results
       uses: actions/upload-artifact@v2
       with:
         name: Icicle_single
+        path: |
           Icicle_single/*.zip
           Icicle_single/*.csv
 
@@ -63,7 +64,7 @@ jobs:
     - name: Export JLCPCB fabrication files
       run: |
         docker run --rm -v $PWD:/pcb -w /pcb --user $UID:$GROUPS yaqwsx/kikit kikit fab jlcpcb --assembly --schematic Icicle.sch --ignore H1,P1,P2 Icicle_panel.kicad_pcb Icicle_panel
-        mv Icicle_panel/gerbers.zip Icicle_panel/Icicle_panel_${{ env.GITHUB_RUN_ID }}.zip
+        mv Icicle_panel/gerbers.zip Icicle_panel/Icicle_panel_${{ github.run_id }}.zip
 
     - name: upload results
       uses: actions/upload-artifact@v2
