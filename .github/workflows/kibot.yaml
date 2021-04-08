@@ -41,7 +41,7 @@ jobs:
 
     - name: Export JLCPCB fabrication files
       run: |
-        docker run --rm -v $PWD:/pcb -w /pcb yaqwsx/kikit kikit fab jlcpcb --assembly --schematic Icicle.sch --ignore H1,P1,P2 Icicle.kicad_pcb Icicle_single
+        docker run --rm -v $PWD:/pcb -w /pcb --user $UID:$GROUPS yaqwsx/kikit kikit fab jlcpcb --assembly --schematic Icicle.sch --ignore H1,P1,P2 Icicle.kicad_pcb Icicle_single
         mv Icicle_single/gerbers.zip Icicle_single/Icicle_single_${{ env.GITHUB_RUN_ID }}.zip
 
     - name: upload results
@@ -58,11 +58,11 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Make the Panel
-      run: docker run --rm -v $PWD:/pcb -w /pcb yaqwsx/kikit kikit panelize grid --space 3 --gridsize 5 1 --tabwidth 5 --tabheight 3 --htabs 1 --vtabs 4 --mousebites 0.5 0.8 -0.25 --radius 1 --railsTb 5 --tooling 2.5 2.5 1.152 --fiducials 10 2.5 1 2  Icicle.kicad_pcb Icicle_panel.kicad_pcb
+      run: docker run --rm -v $PWD:/pcb -w /pcb --user $UID:$GROUPS yaqwsx/kikit kikit panelize grid --space 3 --gridsize 5 1 --tabwidth 5 --tabheight 3 --htabs 1 --vtabs 4 --mousebites 0.5 0.8 -0.25 --radius 1 --railsTb 5 --tooling 2.5 2.5 1.152 --fiducials 10 2.5 1 2  Icicle.kicad_pcb Icicle_panel.kicad_pcb
 
     - name: Export JLCPCB fabrication files
       run: |
-        docker run --rm -v $PWD:/pcb -w /pcb yaqwsx/kikit kikit fab jlcpcb --assembly --schematic Icicle.sch --ignore H1,P1,P2 Icicle_panel.kicad_pcb Icicle_panel
+        docker run --rm -v $PWD:/pcb -w /pcb --user $UID:$GROUPS yaqwsx/kikit kikit fab jlcpcb --assembly --schematic Icicle.sch --ignore H1,P1,P2 Icicle_panel.kicad_pcb Icicle_panel
         mv Icicle_panel/gerbers.zip Icicle_panel/Icicle_panel_${{ env.GITHUB_RUN_ID }}.zip
 
     - name: upload results
