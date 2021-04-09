@@ -62,10 +62,8 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Make the Panel
-      run: ${{ env.KIKIT }} panelize grid --space 3 --gridsize 5 1 --tabwidth 5 --tabheight 3 \
-                                          --htabs 1 --vtabs 4 --mousebites 0.5 0.8 -0.25 --radius 1 \
-                                          --railsTb 5 --tooling 2.5 2.5 1.152 --fiducials 10 2.5 1 2 \
-                                          Icicle.kicad_pcb Icicle_panel.kicad_pcb
+      run: |
+        ${{ env.KIKIT }} panelize grid --space 3 --gridsize 5 1 --tabwidth 5 --tabheight 3 --htabs 1 --vtabs 4 --mousebites 0.5 0.8 -0.25 --radius 1 --railsTb 5 --tooling 2.5 2.5 1.152 --fiducials 10 2.5 1 2 Icicle.kicad_pcb Icicle_panel.kicad_pcb
 
     - name: Export JLCPCB fabrication files
       run: |
