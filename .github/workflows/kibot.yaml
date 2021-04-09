@@ -71,5 +71,6 @@ jobs:
       with:
         name: Icicle_panel
         path: |
+          Icicle_panel.kicad_pcb
           Icicle_panel/*.zip
           Icicle_panel/*.csv
